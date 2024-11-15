@@ -154,8 +154,8 @@ dict4 = { # Regents Course Code
     "U.S. History H":"04101F",
     "AP U.S. History":"04101F",
     "Physics Honors":"03151",
-    "Living Envir Bio":"03051",
-    "Living Envir-Bio H":"03051",
+    "Biology":"03051",
+    "Biology H":"03051",
     "Global History 10":"04052",
     "Global History 10 H":"04052",
     "AP World History: Modern":"04052",
@@ -163,7 +163,7 @@ dict4 = { # Regents Course Code
     "Geometry H Common Core":"02072CC",
     "English 10 H":"01003CC",
     "English 11":"01003CC",
-    "Earth Science":"03001",
+    "Earth and Space Science":"03001",
     "Spanish II H":"NONE",
     "Spanish III":"NONE"
     }
