@@ -11,8 +11,8 @@ from tkinter import ttk
 # Python Script to take in a exports of student information
 # and format a new spreadsheet to submit to various sources
 # such as New York State or MySchoolApp
-# Version: 3.0
-# Major Update: Added Regents Score Updating
+# Version: 3.1
+# Minor Update: Fixed names of Biology and Earth Science Course Titles for 24-25 Year
 
 today = datetime.date.today()
 month = today.month
