@@ -11,8 +11,11 @@ from tkinter import ttk
 # Python Script to take in a exports of student information
 # and format a new spreadsheet to submit to various sources
 # such as New York State or MySchoolApp
-# Version: 3.1
-# Minor Update: Fixed names of Biology and Earth Science Course Titles for 24-25 Year
+# Version: 3.2
+# Minor Update: Aligned course titles with regents course codes for upcoming regents.
+# Notes for future: 2025-2026 School Year will change to Earth and Space Science Regents.
+# Course Code: 03008
+# Come June 2025, Geometry Regents Course Code is changing to 02072
 
 today = datetime.date.today()
 month = today.month
@@ -29,15 +32,16 @@ districtCodeList = ["District Code"] # Used with longCode for Regents Upload.
 shortCode = "049051"
 shortCodeList = ["Short"]
 locationCodeList = ["LocationCode"]
-regentDate = str(year) + "-06-30"
 regentDateList = ["Regent Date"]
 adminMonthList = []
 textMonth = ""
 if month >=9:
+    regentDate = str(year + 1) + "-06-30"
     textMonth = "Jan"
 elif month <= 5:
     textMonth = "Jun"
 else:
+    regentDate = str(year) + "-06-30"
     textMonth = "Aug"
 stuIDList = []
 fNameList = []
@@ -145,8 +149,8 @@ dict3 = {
     12:year - 3}
 
 dict4 = { # Regents Course Code
-    "Algebra 1 Common Core":"02052CC",
-    "Algebra 1H Common Core":"02052CC",
+    "Algebra 1 Common Core":"02050",
+    "Algebra 1H Common Core":"02050",
     "Algebra II":"02056CC",
     "Algebra II Honors":"02056CC",
     "Chemistry":"03101",
@@ -156,9 +160,9 @@ dict4 = { # Regents Course Code
     "Physics Honors":"03151",
     "Biology":"03051",
     "Biology H":"03051",
-    "Global History 10":"04052",
-    "Global History 10 H":"04052",
-    "AP World History: Modern":"04052",
+    "Global History 10":"04052NF",
+    "Global History 10 H":"04052NF",
+    "AP World History: Modern":"04052NF",
     "Geometry Common Core":"02072CC",
     "Geometry H Common Core":"02072CC",
     "English 10 H":"01003CC",
@@ -383,6 +387,7 @@ def regentsAnswerSheets():
     #print(courseList)
     # Setup for some lists
     for i in range(0,len(courseList)-1):
+        stuIDList[i] = "0000"+str(stuIDList[i])
         longCodeList.append(longCode)
         shortCodeList.append(shortCode)
         schoolList.append(school)
@@ -406,13 +411,13 @@ def regentsAnswerSheets():
     spanish = wb.create_sheet("spanish")
     #linking regent code to sheet
     dict6 = {
-    "02052CC": algebra1,
+    "02050": algebra1,
     "02056CC": algebra2,
     "03101": chemistry,
     "04101F": usHistory,
     "03151": physics,
     "03051": livingEnvir,
-    "04052": globalHistory,
+    "04052NF": globalHistory,
     "02072CC": geometry,
     "01003CC": english,
     "03001": earthScience,
