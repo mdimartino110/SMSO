@@ -1,4 +1,4 @@
-VERSION 3.0
+VERSION 3.2
 
 SaintMarysSpreadsheetOrganizer.exe is a script created to allow easy organizing and formatting of data for Saint Mary's Highschool. The data is pulled  directly from myschoolapp, and can be inputted into the script after converting the CSV file that MSA spits out into an excel file (.xlsx). Currently, this program has three sorting functions. The first is demographic information. The second is for regents answer sheet formatting. The third is for regents grade uploads. For the demographic information, you will also need a District Code spreadsheet. This file can be updated with more district codes and zip codes as needed, and is included in the Saint Mary's Google Drive.
 
