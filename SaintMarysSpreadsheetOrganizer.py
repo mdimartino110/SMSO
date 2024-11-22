@@ -292,6 +292,8 @@ def demographicUpload():
             y = dict3[gradeList[i+1]]
             startDate = str(y) + "-09-01"
             startList.append(startDate)
+            if gradeList[i+1] == 9:
+                gradeList[i+1] = "0"+str(gradeList[i+1])
             if mNameList[i+1] == "":
                 pass
             else:
@@ -334,7 +336,7 @@ def demographicUpload():
                    spacerList, spacerList, addressList, \
                    address2List, cityList, stateList, zipCodeList, \
                    p1fullList, p2fullList, spacerList, spacerList, \
-                   spacerList, spacerList, ethnicityList, distList, hispanicList, \
+                   spacerList, spacerList, spacerList, distList, hispanicList, \
                    ):
         sheet2.append(row)
 
