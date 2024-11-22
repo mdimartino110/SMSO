@@ -5,7 +5,7 @@ SaintMarysSpreadsheetOrganizer.exe is a script created to allow easy organizing 
 HOW TO USE FOR DEMOGRAPHIC INFORMATION:
 
 1. Download the CSV of student data from myschoolapp lists. The list that gives a proper export is named "Student Info for Demographic Upload".
-2. Open this CSV in Microsoft Excel. Click "Save As" and save the spreadsheet as a Microsoft Excel file, WITHOUT MAKING ANY CHANGES.
+2. Open this CSV in Microsoft Excel. Click "Convert" when prompted with the option to get rid of leading zeros. Click "Save As" and save the spreadsheet as a Microsoft Excel file, WITHOUT MAKING ANY CHANGES.
 3. Run the SaintMarysSpreadsheetOrganizer.exe file. If Windows attempts to block the run, hit "More Info" and "Run Anyway". 
 4. You will get a User Interface screen. Enter "1" into the text bar and click the button.
 	a. The first window is where you will input your STUDENT INFORMATION SHEET.
