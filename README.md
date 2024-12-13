@@ -12,7 +12,7 @@ HOW TO USE FOR DEMOGRAPHIC INFORMATION:
 	b. The second window is where you will input your DISTRICT CODE SHEET.
 	c. The third window is where you want your ORGANIZED spreadsheet to be put.
 
-HOW TO USE FOR REGENTS ANSWER SHEETS
+HOW TO USE FOR REGENTS ANSWER SHEETS:
 
 1. Download the CSV of student data from myschoolapp lists. The list that gives a proper export is named "RIC Answer Sheets for Script".
 2. Open this CSV in Microsoft Excel. Click "Save As" and save the spreadsheet as a Microsoft Excel file, WITHOUT MAKING ANY CHANGES.
@@ -21,7 +21,7 @@ HOW TO USE FOR REGENTS ANSWER SHEETS
 	a. The first window is where you will input your STUDENT REGENTS INFORMATION SHEET.
 	b. The second window is where you want your ORGANIZED spreadsheet to be put.
 
-HOW TO USE FOR REGENTS GRADING
+HOW TO USE FOR REGENTS GRADING:
 
 1. Download the CSV of student data from myschoolapp lists.
 2. Open this CSV in Microsoft Excel. Click "Save As" and save the spreadsheet as a Microsoft Excel file, WITHOUT MAKING ANY CHANGES.
@@ -29,6 +29,16 @@ HOW TO USE FOR REGENTS GRADING
 4. You will get a User Interface screen. Enter "3" into the text bar and click the button.
 	a. The first window is where you will input your STUDENT REGENTS GRADE SHEET.
 	b. The second window is where you want your ORGANIZED spreadsheet to be put.
+
+HOW TO USE FOR MANHASSET DISTRICT UPLOADING:
+
+1. Download the CSV of student data from myschoolapp lists. The list that gives a proper export is named "Manhasset District Upload For DiMartino Script".
+2. Open this CSV in Microsoft Excel. Click "Convert" when prompted with the option to get rid of leading zeros. Click "Save As" and save the spreadsheet as a Microsoft Excel file, WITHOUT MAKING ANY CHANGES.
+3. Run the SaintMarysSpreadsheetOrganizer.exe file. If Windows attempts to block the run, hit "More Info" and "Run Anyway".
+4. You will get a User Interface screen. Enter "4" into the text bar and click the button.
+	a. The first window is where you will input your STUDENT INFORMATION SHEET.
+	b. The second window is where you will input your DISTRICT CODE SHEET.
+	c. The third window is where you want your ORGANIZED spreadsheet to be put.
 
 For all of these processes, the file explorer windows will have directions in the title if you forget.
 
