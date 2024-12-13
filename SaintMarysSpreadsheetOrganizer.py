@@ -11,11 +11,10 @@ from tkinter import ttk
 # Python Script to take in a exports of student information
 # and format a new spreadsheet to submit to various sources
 # such as New York State or MySchoolApp
-# Version: 3.2
-# Minor Update: Aligned course titles with regents course codes for upcoming regents.
+# Version: 4.0
+# Major Update: Added Manhasset District Upload Functionality
 # Notes for future: 2025-2026 School Year will change to Earth and Space Science Regents.
 # Course Code: 03008
-# Come June 2025, Geometry Regents Course Code is changing to 02072
 
 today = datetime.date.today()
 month = today.month
@@ -80,6 +79,7 @@ scoreList = []
 junkList = []
 hostIDList = []
 userIDList = []
+stuEmailList = []
 titleList = ["District Code", "Location Code", "Version", "Admin Month", \
              "StudentID", "LastName", "FirstName", "GradeLevel", \
              "CourseSection", "TeacherName", "StateCourseCode", \
@@ -100,6 +100,14 @@ percentile = ["percentile"]
 scale = ["scale"]
 stanine = ["stanine"]
 subtestComment = ["subtest_comment"]
+p1emailList = []
+p1cellList = []
+p1workList = []
+p1homeList = []
+p2workList = []
+I20List = []
+stuEmailList = []
+districtList = []
 
     
 distList = ["Code"] # Used with district codes sheet for demographic information.
@@ -163,8 +171,8 @@ dict4 = { # Regents Course Code
     "Global History 10":"04052NF",
     "Global History 10 H":"04052NF",
     "AP World History: Modern":"04052NF",
-    "Geometry Common Core":"02072CC",
-    "Geometry H Common Core":"02072CC",
+    "Geometry Common Core":"02072",
+    "Geometry H Common Core":"02072",
     "English 10 H":"01003CC",
     "English 11":"01003CC",
     "Earth and Space Science":"03001",
@@ -224,6 +232,33 @@ dict8 = { # RegentsUpdated test description coordinator
     "Spanish III":"FLACS B: Spanish",
     "Spanish III H":"FLACS B: Spanish"
     }
+
+dict9 = {
+    "STU_ID":stuIDList,
+    "FNAME":fNameList,
+    "LNAME": lNameList,
+    "MI": mNameList,
+    "GRADE": gradeList,
+    "ADD1": addressList,
+    "ADD2": address2List,
+    "CITY": cityList,
+    "STATE": stateList,
+    "ZIP": zipCodeList,
+    "GEN": genderList,
+    "DOB": dobList,
+    "Parent 1 First Name":p1fnList,
+    "Parent 1 Last Name":p1lnList,
+    "Parent 2 First Name":p2fnList,
+    "Parent 2 Last Name":p2lnList,
+    "HR":hrList,
+    "Parent 1 Email": p1emailList,
+    "Parent 1 Cell": p1cellList,
+    "Parent 1 Work": p1workList,
+    "Parent 1 Home": p1homeList,
+    "Parent 2 Work": p2workList,
+    "I20": I20List,
+    "Student Email": stuEmailList,
+    "District": districtList}
     
 
 #print(dict1)
@@ -389,6 +424,8 @@ def regentsAnswerSheets():
     #print(courseList)
     # Setup for some lists
     for i in range(0,len(courseList)-1):
+        if gradeList[i] == 9:
+            gradeList[i] = "0" + str(gradeList[i])
         stuIDList[i] = "0000"+str(stuIDList[i])
         longCodeList.append(longCode)
         shortCodeList.append(shortCode)
@@ -420,7 +457,7 @@ def regentsAnswerSheets():
     "03151": physics,
     "03051": livingEnvir,
     "04052NF": globalHistory,
-    "02072CC": geometry,
+    "02072": geometry,
     "01003CC": english,
     "03001": earthScience,
     "NONE": spanish
@@ -517,7 +554,76 @@ def regentsUpdater():
     wb2.save(folder_selected) 
     sys.exit()
 
-    
+def manhassetDistrictReporting():
+    filename = askopenfilename(title= "Please Select the Manhasset District File from MSA:", \
+                               filetypes = [("Excel Files", "*.xlsx")]) # show an "Open" dialog box and return the path to the selected file
+    filename2 = askopenfilename(title= "Enter District Code Spreadsheet Here:", \
+                                filetypes = [("Excel Files", "*.xlsx")])
+
+    dataframe = openpyxl.load_workbook(filename) # openpyxl stuff to read from initial spreadsheet
+    dataframe1 = dataframe.active
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    dataframe2 = openpyxl.load_workbook(filename2)
+    dataframe3 = dataframe2.active
+    wb3 = openpyxl.Workbook()
+    sheet3 = wb3.active
+
+    # Sucks in the data from the spreadsheet you choose and assigns it to the proper list.
+    for col in range (0, dataframe1.max_column):
+        #print(col)
+        for row in dataframe1.iter_rows(1, dataframe1.max_row):
+            try:
+                x = dict9[str(row[col].value)]
+            except:
+                pass
+            #print(row[col].value)
+            if row[col].value == None:
+                x.append("")
+            else:
+                x.append(row[col].value)
+            #print(x)
+
+    #Adding district codes to a dictionary
+    for row in range(1, dataframe3.max_row + 1):
+        key = dataframe3.cell(row, 1).value
+        value = dataframe3.cell(row, 2).value
+        codeDict[key] = value
+
+    for i in range(0,len(stuIDList)):
+        try:
+            if dobList[i+1] == "":
+                pass
+            else:
+                dobList[i+1] = dobList[i+1].strftime("%m/%d/%Y")
+            gradeList[i+1] = str(gradeList[i+1]) + "th"
+            if p1workList[i+1] == "":
+                p1workList[i+1] = p2workList[i+1]
+            if zipCodeList[i+1] not in codeDict:
+                codeDict[zipCodeList[i+1]] = "NO DISTRICT CODE FOUND FOR ZIPCODE"
+            z = codeDict[zipCodeList[i+1]]
+            distList.append(str(z))
+            dobList[i+1] = str(dobList[i+1])
+        except:
+            pass
+
+    wb2 = openpyxl.Workbook()
+    sheet2 = wb2.active
+
+    #print(dobList)
+
+    for row in zip(stuIDList, fNameList, lNameList, mNameList, gradeList, hrList, p1fnList, p1lnList, \
+                   p2fnList, p2lnList, p1cellList, p1workList, p1homeList, p1emailList, addressList, \
+                   address2List, cityList, stateList, zipCodeList, genderList, districtList, distList, \
+                   stuEmailList, dobList, I20List):
+        sheet2.append(row)
+
+    folder_selected = filedialog.askdirectory(title="Please Select Where You Want To Save Your New File")
+    folder_selected = folder_selected +"\\ManhassetDistrictUpload.xlsx"
+    print(folder_selected.replace("/","\\"))
+    wb2.save(folder_selected) 
+    sys.exit()
+
 
 # Runner Function
 def runCode():
@@ -534,6 +640,9 @@ def runCode():
     elif option == "3":
         win.destroy()
         regentsUpdater()
+    elif option == "4":
+        win.destroy()
+        manhassetDistrictReporting()
     else:
         label.config(text= "Please choose one of the options below")
 
@@ -544,7 +653,7 @@ win.geometry("400x300")
 label=Label(win, text="Welcome to the Saint Mary's Spreadsheet Organizer\n \
     Please enter a choice according to your needs.")
 label2=Label(win, text= "1: Demographic Upload\n2: Regents Answer Sheets\n\
-3: Regents Scores Updater\n")
+3: Regents Scores Updater\n4: Manhasset District Reporting\n")
 label.pack()
 label2.pack()
 entry = Entry(win, width=20)
