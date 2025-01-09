@@ -2,6 +2,7 @@ import openpyxl
 import datetime
 import tkinter
 import sys
+import re
 from tkinter import Tk     # from tkinter import Tk for Python 3.x
 from tkinter.filedialog import askopenfilename
 from tkinter import filedialog
@@ -11,8 +12,8 @@ from tkinter import ttk
 # Python Script to take in a exports of student information
 # and format a new spreadsheet to submit to various sources
 # such as New York State or MySchoolApp
-# Version: 4.0
-# Major Update: Added Manhasset District Upload Functionality
+# Version: 4.1
+# Minor Update: Added Phone Number support for demo upload
 # Notes for future: 2025-2026 School Year will change to Earth and Space Science Regents.
 # Course Code: 03008
 
@@ -38,6 +39,7 @@ if month >=9:
     regentDate = str(year + 1) + "-06-30"
     textMonth = "Jan"
 elif month <= 5:
+    regentDate = str(year) + "-06-30"
     textMonth = "Jun"
 else:
     regentDate = str(year) + "-06-30"
@@ -80,6 +82,7 @@ junkList = []
 hostIDList = []
 userIDList = []
 stuEmailList = []
+phoneList = []
 titleList = ["District Code", "Location Code", "Version", "Admin Month", \
              "StudentID", "LastName", "FirstName", "GradeLevel", \
              "CourseSection", "TeacherName", "StateCourseCode", \
@@ -108,8 +111,8 @@ p2workList = []
 I20List = []
 stuEmailList = []
 districtList = []
+wirelessList = []
 
-    
 distList = ["Code"] # Used with district codes sheet for demographic information.
 # This dictionary is used to organize the data taken in from the  demographic upload list. 
 #Key is the first value in the column (title). Value is the list you add the data to.
@@ -132,7 +135,9 @@ dict1 = {
     "Parent 2 Last Name":p2lnList,
     "ETH":ethnicityList,
     "Hispanic?":hispanicList,
-    "HR":hrList}
+    "HR":hrList,
+    "HOMEPHONE":phoneList,
+    "WIRELESS":wirelessList}
 
 # This dictionary is for formatting ethnicity values.
 dict2 = {
@@ -320,6 +325,12 @@ def demographicUpload():
         aList.append(A)
         spacerList.append("")
         try:
+            if phoneList[i+1] == "":
+                phoneList[i+1] = wirelessList[i+1]
+            phoneList[i+1] = str(phoneList[i+1]).removeprefix("+")
+            phoneList[i+1] = str(phoneList[i+1]).removeprefix("1")     # remove leading +1 or 1
+            phoneList[i+1] = re.sub("[ ()-]", '', str(phoneList[i+1])) # remove space, (), -
+            phoneList[i+1] = f"{str(phoneList[i+1])[:3]}-{str(phoneList[i+1])[3:6]}-{str(phoneList[i+1])[6:]}"
             if zipCodeList[i+1] not in codeDict:
                 codeDict[zipCodeList[i+1]] = "NO DISTRICT CODE FOUND FOR ZIPCODE"
             z = codeDict[zipCodeList[i+1]]
@@ -354,6 +365,7 @@ def demographicUpload():
             hrList[i+1] = hrList[i+1].replace("Homeroom ", "")
         except:
             pass
+       
 
     # New spreadsheet to write into
 
@@ -369,7 +381,7 @@ def demographicUpload():
                    aList, regentDateList, spacerList, spacerList, \
                    spacerList, spacerList, spacerList, startList, \
                    spacerList, spacerList, addressList, \
-                   address2List, cityList, stateList, zipCodeList, \
+                   address2List, cityList, stateList, zipCodeList, phoneList, \
                    p1fullList, p2fullList, spacerList, spacerList, \
                    spacerList, spacerList, spacerList, distList, hispanicList, \
                    ):
