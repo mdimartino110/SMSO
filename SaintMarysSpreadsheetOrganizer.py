@@ -12,8 +12,8 @@ from tkinter import ttk
 # Python Script to take in a exports of student information
 # and format a new spreadsheet to submit to various sources
 # such as New York State or MySchoolApp
-# Version: 4.1
-# Minor Update: Added Phone Number support for demo upload
+# Version: 4.11
+# Bug Fixes: Adjusted Spacing + year formatting in demo upload
 # Notes for future: 2025-2026 School Year will change to Earth and Space Science Regents.
 # Course Code: 03008
 
@@ -155,11 +155,18 @@ if month <= 8 and month >= 12:
 else:
     pass
 
-dict3 = {
-    9:year,
-    10:year - 1,
-    11:year - 2,
-    12:year - 3}
+if month <= 8:
+    dict3 = {
+        9:year - 1,
+        10:year - 2,
+        11:year - 3,
+        12:year - 4}
+else:
+    dict3 = {
+        9:year,
+        10:year - 1,
+        11:year - 2,
+        12:year - 3}
 
 dict4 = { # Regents Course Code
     "Algebra 1 Common Core":"02050",
@@ -383,7 +390,7 @@ def demographicUpload():
                    spacerList, spacerList, addressList, \
                    address2List, cityList, stateList, zipCodeList, phoneList, \
                    p1fullList, p2fullList, spacerList, spacerList, \
-                   spacerList, spacerList, spacerList, distList, hispanicList, \
+                   spacerList, spacerList, distList, hispanicList, \
                    ):
         sheet2.append(row)
 
